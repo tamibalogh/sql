@@ -1,0 +1,18 @@
+{"languages.0" : "English", "awards.wins" : {$eq: 2}}
+{title: 1, writers: 1, directors: 1, year: 1}
+{year: -1}
+
+db.users.find({email:{$regex: /.com/}}, {name: 1, email:1, _id: 0})
+
+db.movies.aggregate([ {$group: {_id: "$rated", atlag: {$avg: "runtime"}}, {year: {$gt: 1950}}}])
+
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE m.released > 1970 OR m.title CONTAINS "Love"
+RETURN m.title AS Cím, p.name AS Név
+ORDER BY m.title DESC
+
+MATCH (m:Movie)-[:DIRECTED]-(p:Person)
+WHERE m.released < 2000
+WITH COUNT(*) AS db, p.name AS nev
+WHERE db > 1
+RETURN nev, db
