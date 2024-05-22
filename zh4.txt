@@ -1,0 +1,13 @@
+CASSANDRA:
+Moodle-ben
+
+REDIS:
+HSET IRO ID 1 nev "Agatha Christie" nemzetiseg angol
+HSET IRO ID 2 nev "JK Rowling" nemzetiseg angol
+HSET KONYV ID 1 cim "Tiz kicsi neger" mufaj krimi IRO_ID 1
+HSET KONYV ID 2 cim "Harry Potter" mufaj fantasy IRO_ID 2
+
+NEO4J:
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(p2:Person)
+WHERE p.name = 'Tom Hanks'
+RETURN p2.name
